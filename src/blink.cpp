@@ -1,10 +1,9 @@
 #include <Arduino.h>
 
-#define onboard 13
 
-void blink(int ms) {
-    digitalWrite(onboard, LOW);
+void blink(uint8_t pin, int ms) {
+    digitalWrite(pin, LOW);
     delay(ms);
-    digitalWrite(onboard, HIGH);
+    digitalWrite(pin, HIGH);
     delay(ms);
 }

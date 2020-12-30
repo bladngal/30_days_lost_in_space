@@ -1,6 +1,6 @@
 #ifndef BLINK_H
 #define BLINK_H
 
-void blink(int ms);
+void blink(uint8_t pin, int ms);
 
 #endif
