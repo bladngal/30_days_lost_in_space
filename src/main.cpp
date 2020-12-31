@@ -1,19 +1,23 @@
 // src/main.cpp
 #include <Arduino.h>
 #include "blink.h"
-//#define onboard 13
 
 int LED = 12;
+int Switch1 = 2;
 
 void setup() {
     pinMode(LED, OUTPUT);
-    //Serial.begin(9600);
-    
+    pinMode(Switch1, INPUT);  
 }
 
-
 void loop() {
+  if(digitalRead(Switch1) == 1){
+    digitalWrite(LED, HIGH); //send 5V aka ON
+  }
+  else{
+    digitalWrite(LED, LOW); //turn it off aka GROUND
+  }
   
-  blink(LED, 1000);
+  
     Serial.println("Loop complete");
 }
