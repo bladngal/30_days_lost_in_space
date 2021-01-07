@@ -1,19 +1,25 @@
 // src/main.cpp
 #include <Arduino.h>
-#include "blink.h"
-//#define onboard 13
 
-int LED = 12;
+int sensorPin = A0;
+int onboardLED = 13;
+int sensorValue = 0; //holder value
+
 
 void setup() {
-    pinMode(LED, OUTPUT);
-    //Serial.begin(9600);
-    
+  Serial.begin(9600);  
+  pinMode(onboardLED, OUTPUT);
+
 }
 
 
 void loop() {
-  
-  blink(LED, 1000);
-    Serial.println("Loop complete");
+  sensorValue = analogRead(sensorPin);
+
+  digitalWrite(onboardLED, HIGH);
+  delay(sensorValue);
+  digitalWrite(onboardLED, LOW);
+  delay(sensorValue);
+    Serial.println(sensorValue);
+    delay(500);
 }
