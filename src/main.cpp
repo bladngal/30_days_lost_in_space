@@ -1,6 +1,7 @@
 // src/main.cpp
 #include <Arduino.h>
 
+// RGB LED pins
 int red = 11;
 int green = 10;
 int blue = 9;
