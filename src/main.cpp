@@ -1,16 +1,30 @@
 #include <Arduino.h>
 #include <TM1637Display.h>
 // Module connection pins (Digital Pins)
+//rotary encoder
 #define CLK2 3  // reversed CLK2 and DT2 to get get the CL/CCW to read correctly
 #define DT2 2   // I assume Alex's logic is incorrect, but others do not seem to agree
 #define SW 4
 
+//seven segment display
 // Define the connections pins:
 #define CLK 5
 #define DIO 6
 
 // Create display object of type TM1637Display:
 TM1637Display display = TM1637Display(CLK, DIO);
+
+// Create array that turns all segments on:
+const uint8_t data[] = {0xff, 0xff, 0xff, 0xff};
+// Create array that turns all segments off:
+const uint8_t blank[] = {0x00, 0x00, 0x00, 0x00};
+// You can set the individual segments per digit to spell words or create other symbols:
+const uint8_t done[] = {
+    SEG_B | SEG_C | SEG_D | SEG_E | SEG_G,          // d
+    SEG_A | SEG_B | SEG_C | SEG_D | SEG_E | SEG_F,  // O
+    SEG_C | SEG_E | SEG_G,                          // n
+    SEG_A | SEG_D | SEG_E | SEG_F | SEG_G           // E
+};
 
 int lastStateCLK;
 int counter = 0;
@@ -67,5 +81,21 @@ void setup() {
 
 void loop() {
     display.showNumberDec(counter);
-    delay(50);
+    delay(100);
+    if (counter == 50) {
+        display.setSegments(data);
+        delay(3000);
+        display.clear();
+        counter += 5;
+    }
+    if (counter == 75) {
+        display.setSegments(data);
+        delay(3000);
+        display.clear();
+        counter += 5;
+    }
+    if (counter == 100) {
+        display.setSegments(done);
+        delay(1000000);
+    }
 }
